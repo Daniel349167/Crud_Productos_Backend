@@ -1,66 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Backend de Gestión de Productos - Laravel
 
-## About Laravel
+Este proyecto es el backend de la aplicación de gestión de productos, desarrollado con Laravel. La API permite gestionar productos (creación, visualización, edición y eliminación) a través de varios endpoints RESTful.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requisitos Previos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Antes de empezar, asegúrate de tener instalados los siguientes programas en tu entorno de desarrollo:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP (versión 7.4 o superior)
+- Composer
+- MySQL
+- Node.js (versión 14.x o superior para npm scripts)
 
-## Learning Laravel
+## Instalación
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Sigue los siguientes pasos para configurar y ejecutar el proyecto:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Clona el repositorio:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   git clone https://github.com/Daniel349167/Crud_Productos_Backend.git
+   ```
 
-## Laravel Sponsors
+2. Entra en la carpeta del proyecto:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   ```bash
+   cd Crud_Productos_Backend
+   ```
 
-### Premium Partners
+3. Instala las dependencias del proyecto con Composer:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+   ```bash
+   composer install
+   ```
 
-## Contributing
+4. Copia el archivo de configuración `.env.example` y renómbralo como `.env`:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   cp .env.example .env
+   ```
 
-## Code of Conduct
+5. Genera una nueva clave de aplicación:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```bash
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+6. Configura las variables de entorno para la base de datos en el archivo `.env`. Aquí un ejemplo de configuración:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nombre_de_tu_base_de_datos
+   DB_USERNAME=tu_usuario
+   DB_PASSWORD=tu_contraseña
+   ```
 
-## License
+7. Ejecuta las migraciones para crear las tablas en la base de datos:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   ```bash
+   php artisan migrate
+   ```
+
+8. (Opcional) Si deseas poblar la base de datos con algunos datos de ejemplo, ejecuta los seeders:
+
+   ```bash
+   php artisan db:seed
+   ```
+
+## Ejecución del Servidor de Desarrollo
+
+Para ejecutar el servidor de desarrollo, usa el siguiente comando:
+
+```bash
+php artisan serve
+```
+
+El backend estará disponible en `http://localhost:8000`.
+
+## Endpoints de la API
+
+Los principales endpoints para gestionar los productos son los siguientes:
+
+- **GET /products**: Listar todos los productos.
+- **GET /products/{id}**: Mostrar un producto específico por su ID.
+- **POST /products**: Crear un nuevo producto.
+- **PUT /products/{id}**: Actualizar un producto existente.
+- **DELETE /products/{id}**: Eliminar un producto.
+
+## Pruebas de la API
+
+Puedes utilizar herramientas como Postman o curl para probar los endpoints de la API. Aquí algunos ejemplos:
+
+### Listar todos los productos (GET)
+
+```bash
+curl -X GET http://localhost:8000/api/products
+```
+
+### Crear un nuevo producto (POST)
+
+```bash
+curl -X POST http://localhost:8000/api/products -d 'name=Producto de Ejemplo&description=Descripción del producto&price=100&stock=10'
+```
+
+### Actualizar un producto existente (PUT)
+
+```bash
+curl -X PUT http://localhost:8000/api/products/1 -d 'name=Producto Actualizado&price=150'
+```
+
+### Eliminar un producto (DELETE)
+
+```bash
+curl -X DELETE http://localhost:8000/api/products/1
+```
+
